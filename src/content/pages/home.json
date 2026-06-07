@@ -1,26 +1,17 @@
 {
-  "hero": {
-    "secondaryLabel": "View services",
-    "variant": "image-full",
-    "eyebrow": "Premium Timber Flooring",
-    "intro": "Melbourne's trusted timber flooring specialists. From installation to refinishing, we bring craftsmanship and care to every project.",
-    "primaryUrl": "/contact/",
-    "mediaPosition": "right",
-    "mediaLabel": "Flexible hero",
-    "mediaText": "Use this space for photography, a proof point, or a location/service cue.",
-    "primaryLabel": "Get a free quote",
-    "mediaTitle": "Choose a hero shape that suits the client",
-    "title": "Beautiful Floors\nStart Here",
-    "secondaryUrl": "/services/",
-    "highlights": [
-      "Consulting",
-      "Implementation",
-      "Support",
-      "Test"
-    ]
-  },
-  "servicesVariant": "icon-grid",
-  "testimonialsVariant": "grid",
-  "galleryVariant": "portfolio",
-  "ctaVariant": "band"
+    "hero": {
+        "variant": "image-full",
+        "eyebrow": "Melbourne's Heritage Plastering Specialists",
+        "title": "Crafted Plaster Since 1996",
+        "intro": "30 years of heritage plastering craftsmanship. From period restoration and ornamental cornicing to modern residential builds \u2014 Mark Dennerley brings precision, artistry, and care to every project.",
+        "primaryLabel": "Free Quote",
+        "primaryUrl": "/contact/",
+        "secondaryLabel": "Our Services",
+        "secondaryUrl": "/services/",
+        "imageUrl": "/uploads/hero-plastering.jpg"
+    },
+    "servicesVariant": "icon-grid",
+    "testimonialsVariant": "grid",
+    "galleryVariant": "portfolio",
+    "ctaVariant": "band"
 }

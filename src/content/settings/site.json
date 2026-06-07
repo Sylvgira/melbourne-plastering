@@ -1,20 +1,20 @@
 {
-  "name": "Client Business",
-  "description": "A clear small-business website starter built for fast client adaptation.",
-  "url": "https://example.com",
-  "email": "hello@example.com",
-  "phone": "+61 400 000 000",
-  "address": "123 Example Street, Melbourne VIC",
-  "ctaLabel": "Book a call",
-  "ctaUrl": "/contact/",
-  "socialLinks": [
-    {
-      "label": "Instagram",
-      "url": "https://example.com"
-    },
-    {
-      "label": "LinkedIn",
-      "url": "https://example.com"
-    }
-  ]
+    "name": "Melbourne Plastering",
+    "description": "Melbourne's heritage plastering specialists with 30 years experience. Period restoration, ornamental cornicing, and premium plastering craftsmanship.",
+    "url": "https://melbourneplastering.com.au",
+    "email": "mark@melbourneplastering.com.au",
+    "phone": "0419 992 210",
+    "address": "Servicing all Melbourne suburbs",
+    "ctaLabel": "Free Quote",
+    "ctaUrl": "/contact/",
+    "socialLinks": [
+        {
+            "label": "Facebook",
+            "url": "https://www.facebook.com/melbourneplastering.com.au"
+        },
+        {
+            "label": "Instagram",
+            "url": "https://instagram.com/melbourneplastering"
+        }
+    ]
 }

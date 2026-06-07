@@ -2,7 +2,7 @@ local_backend: true
 
 backend:
   name: github
-  repo: owner/repository
+  repo: Sylvgira/melbourne-plastering
   branch: main
 
 media_folder: public/uploads
