@@ -36,6 +36,16 @@ for (const file of walk(dist)) {
   // Fix any relative "melbourne-plastering/" links that lost their leading slash
   html = html.replace(/href="melbourne-plastering\//g, 'href="' + base + '/');
 
+  // Fix image src/srcset paths missing the base prefix
+  const beforeSrc = html;
+  html = html.replace(/(src|srcset)="\/(?!melbourne-plastering\/)(?!_astro\/)([^"]+)"/g, '$1="' + base + '/$2"');
+  if (html !== beforeSrc) changed = true;
+
+  // Fix inline style url() references missing the base prefix
+  const beforeUrl = html;
+  html = html.replace(/(url\(\s*)('|")?\/(?!melbourne-plastering\/)(?!_astro\/)([^"')]+)('|")?\s*\)/g, '$1$2' + base + '/$3$4)');
+  if (html !== beforeUrl) changed = true;
+
   if (changed) {
     fs.writeFileSync(file, html);
     fixed++;
