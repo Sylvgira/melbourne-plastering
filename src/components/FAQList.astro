@@ -21,24 +21,79 @@ const { faqs } = Astro.props;
         <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </summary>
       <div class="faq-answer">
-        <p>{faq.data.answer}</p>
-        <div class="faq-answer__spacer"></div>
+        <div class="faq-answer-inner">
+          <p>{faq.data.answer}</p>
+          <div class="faq-answer__spacer"></div>
+        </div>
       </div>
     </details>
   ))}
 </div>
 
 <script>
-  const container = document.querySelector('[data-faq-accordion]');
-  if (container) {
-    container.addEventListener('toggle', (e) => {
-      if (e.target.tagName === 'DETAILS' && e.target.open) {
-        container.querySelectorAll('details').forEach((d) => {
-          if (d !== e.target) d.open = false;
-        });
+  const containers = document.querySelectorAll('[data-faq-accordion]');
+  containers.forEach((container) => {
+    container.classList.add('faq-list--js');
+
+    const detailsElements = container.querySelectorAll('details');
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    detailsElements.forEach((details) => {
+      const summary = details.querySelector('summary');
+
+      summary.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (details.dataset.state === 'closing') return;
+
+        if (!details.open) {
+          detailsElements.forEach((other) => {
+            if (other !== details && other.open) {
+              closeDetails(other);
+            }
+          });
+          openDetails(details);
+        } else {
+          closeDetails(details);
+        }
+      });
+    });
+
+    function openDetails(details) {
+      details.open = true;
+      if (isReducedMotion) {
+        details.dataset.state = 'open';
+        return;
       }
-    }, true);
-  }
+
+      const content = details.querySelector('.faq-answer');
+      content.offsetHeight; // Force reflow
+      details.dataset.state = 'open';
+    }
+
+    function closeDetails(details) {
+      if (isReducedMotion) {
+        details.open = false;
+        details.dataset.state = '';
+        return;
+      }
+
+      details.dataset.state = 'closing';
+      const content = details.querySelector('.faq-answer');
+
+      const onTransitionEnd = (e) => {
+        if (e.propertyName === 'grid-template-rows') {
+          content.removeEventListener('transitionend', onTransitionEnd);
+          if (details.dataset.state === 'closing') {
+            details.open = false;
+            details.dataset.state = '';
+          }
+        }
+      };
+
+      content.addEventListener('transitionend', onTransitionEnd);
+    }
+  });
 </script>
 
 <style>
@@ -69,31 +124,57 @@ const { faqs } = Astro.props;
 
   .faq-chevron {
     flex-shrink: 0;
-    color: var(--color-text-muted);
+    color: var(--color-gold);
+    transform: rotate(90deg);
     transition: transform 0.25s ease;
   }
 
-  details[open] .faq-chevron {
-    transform: rotate(90deg);
+  details[data-state="open"] .faq-chevron,
+  .faq-list:not(.faq-list--js) details[open] .faq-chevron {
+    transform: rotate(-90deg);
   }
 
   .faq-answer {
     display: grid;
     grid-template-rows: 0fr;
     overflow: hidden;
-    transition: grid-template-rows 0.3s ease;
+    transition: grid-template-rows 0.3s ease-in-out;
   }
 
-  details[open] .faq-answer {
+  .faq-answer-inner {
+    min-height: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  /* JS Active Styles */
+  .faq-list--js details[data-state="open"] .faq-answer {
     grid-template-rows: 1fr;
+  }
+
+  .faq-list--js details[data-state="open"] .faq-answer-inner {
+    opacity: 1;
+    transition: opacity 0.25s ease-in-out 0.05s;
+  }
+
+  /* JS Inactive Fallbacks */
+  .faq-list:not(.faq-list--js) details[open] .faq-answer {
+    grid-template-rows: 1fr;
+  }
+
+  .faq-list:not(.faq-list--js) details[open] .faq-answer-inner {
+    opacity: 1;
   }
 
   .faq-answer p {
     margin: 0;
-    max-width: 48rem;
   }
 
   .faq-answer__spacer {
-    height: var(--space-4);
+    height: var(--space-5);
+  }
+
+  details p {
+    max-width: 48rem;
   }
 </style>
