@@ -110,7 +110,7 @@ const isCarousel = testimonials.length > 1;
 
   .testimonial-carousel__slide {
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 0;
     width: 100%;
     margin: 0;
@@ -119,6 +119,7 @@ const isCarousel = testimonials.length > 1;
     background: var(--color-page);
     opacity: 0;
     visibility: hidden;
+    transform: translateY(-50%);
     transition: opacity 0.4s ease, visibility 0.4s ease;
   }
 
@@ -190,7 +191,7 @@ const isCarousel = testimonials.length > 1;
         s.style.opacity = '';
         s.style.visibility = '';
       });
-      track.style.minHeight = maxH + 'px';
+      track.style.minHeight = (maxH + 24) + 'px';
 
       function show(index) {
         slides[current].classList.remove('testimonial-carousel__slide--active');
