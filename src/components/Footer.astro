@@ -18,7 +18,15 @@ const isDark = variant === 'dark';
 <footer class:list={['site-footer', isDark && 'site-footer--dark']}>
   <div class="site-footer__top container">
     <div class="site-footer__brand-col">
-      <a class="site-footer__brand" href="/">{site.name}</a>
+      <a class="site-footer__brand" href="/">
+        <span class="brand-lockup brand-lockup--footer">
+          <span class="brand-lockup__primary">
+            <span class="brand-lockup__city">Melbourne</span>
+            <span class="brand-lockup__trade">Plastering</span>
+          </span>
+          <span class="brand-lockup__sub">&amp; Building Maintenance</span>
+        </span>
+      </a>
       <p class="site-footer__tagline">Melbourne's heritage plastering specialists. 30 years of craftsmanship — call Mark for a free quote.</p>
     </div>
     <div class="site-footer__links-col">
@@ -128,14 +136,31 @@ const isDark = variant === 'dark';
   .site-footer__brand {
     display: inline-block;
     margin-bottom: var(--space-3);
-    color: var(--color-heading);
-    font-size: var(--text-lg);
-    font-weight: 800;
     text-decoration: none;
   }
 
   .site-footer--dark .site-footer__brand {
     color: #ffffff;
+  }
+
+  .site-footer--dark .brand-lockup__city {
+    color: var(--color-gold);
+  }
+
+  .site-footer--dark .brand-lockup__trade {
+    color: #ffffff;
+  }
+
+  .site-footer--dark .brand-lockup__sub {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .brand-lockup--footer .brand-lockup__primary {
+    font-size: 1.5rem;
+  }
+
+  .brand-lockup--footer .brand-lockup__sub {
+    font-size: 0.9rem;
   }
 
   .site-footer__tagline {
