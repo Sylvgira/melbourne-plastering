@@ -137,13 +137,14 @@ p {
 }
 
 .button--solid-light {
-  background: #ffffff;
-  color: #111111;
-  border-color: #ffffff;
+  background: var(--color-gold);
+  color: var(--brand-name-color);
+  border-color: var(--color-gold);
+  font-weight: 700;
 }
 
 .button--solid-light:hover {
-  filter: brightness(0.9);
+  filter: brightness(1.05);
 }
 
 .button--outline-light {

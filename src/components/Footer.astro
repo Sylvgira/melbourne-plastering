@@ -19,14 +19,14 @@ const isDark = variant === 'dark';
   <div class="site-footer__inner container">
     <div>
       <a class="site-footer__brand" href="/">{site.name}</a>
-      <p>Clear, useful information for people deciding whether to get in touch.</p>
+      <p>Melbourne's heritage plastering specialists. 30 years of craftsmanship — call Mark for a free quote.</p>
     </div>
     <div class="site-footer__columns">
       <div>
         <h2>Explore</h2>
-        <a href="/about/">About</a>
         <a href="/services/">Services</a>
-        <a href="/blog/">News</a>
+        <a href="/#testimonials">Testimonials</a>
+        <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
       </div>
       <div>
@@ -89,6 +89,7 @@ const isDark = variant === 'dark';
     color: var(--color-text-muted);
     font-size: var(--text-sm);
     text-decoration: none;
+    word-break: break-all;
   }
 
   .site-footer p {
@@ -115,7 +116,7 @@ const isDark = variant === 'dark';
 
   .site-footer--dark {
     border-top: none;
-    background: #111111;
+    background: var(--brand-primary);
     color: #ffffff;
   }
 
@@ -125,11 +126,11 @@ const isDark = variant === 'dark';
 
   .site-footer--dark h2 {
     color: rgba(255, 255, 255, 0.55);
-    font-family: var(--font-condensed);
+    font-family: var(--font-display);
     font-size: var(--text-xs);
     font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: normal;
+    text-transform: none;
   }
 
   .site-footer--dark a {

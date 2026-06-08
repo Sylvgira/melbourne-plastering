@@ -14,7 +14,7 @@ import { byOrder } from '../lib/content';
 
 const site = await getEntry('settings', 'site');
 const home = await getEntry('pages', 'home');
-const services = byOrder(await getCollection('services')).slice(0, 3);
+const services = byOrder(await getCollection('services')).slice(0, 4);
 const testimonials = byOrder(await getCollection('testimonials'));
 const faqs = byOrder(await getCollection('faqs'));
 const embeds = byOrder(await getCollection('embeds')).filter((embed) => embed.data.enabled);
@@ -41,40 +41,36 @@ const hero = home?.data.hero;
   />
 
   <Section
-    eyebrow="Services"
-    title="Common offers, ready to tailor"
-    intro="Use these entries as service templates. Keep each page focused on the client problem, the outcome, and the next step."
+    eyebrow="What we do"
+    title="Heritage & Modern Plastering"
+    intro="From period restoration to contemporary builds — Mark brings 30 years of craftsmanship to every project."
   >
     <ServiceGrid services={services} variant={home?.data.servicesVariant} />
   </Section>
 
   <Section
+    id="testimonials"
     variant="surface"
-    eyebrow="Proof"
-    title="Simple trust signals"
-    intro="Replace these placeholders with real client testimonials, partner logos, memberships, or local credentials."
+    eyebrow="Testimonials"
+    title="What our clients say"
   >
     <Testimonials testimonials={testimonials} variant={home?.data.testimonialsVariant} />
   </Section>
 
-  <Section eyebrow="Associations" title="A neutral strip for credibility">
-    <LogoStrip />
-  </Section>
-
-  <Section variant="surface" eyebrow="Media" title="Placeholder gallery">
+  <Section id="gallery" eyebrow="Gallery" title="Our Work">
     <GalleryBlock variant={home?.data.galleryVariant} />
   </Section>
 
   {embeds.map((embed) => <EmbedSection embed={embed} />)}
 
-  <Section eyebrow="Questions" title="Frequently asked questions">
+  <Section eyebrow="Questions" title="Common Questions">
     <FAQList faqs={faqs} />
   </Section>
 
   <CTABand
-    title="Ready to adapt this for a client?"
-    text="Start with the client brief, update the site settings, then swap the brand tokens before writing detailed copy."
-    label="Contact"
+    title="Ready to discuss your project?"
+    text="Call Mark for a free quote and honest advice."
+    label="Free Quote"
     href="/contact/"
     variant={home?.data.ctaVariant}
   />

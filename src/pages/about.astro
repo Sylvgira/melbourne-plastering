@@ -2,36 +2,60 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PageIntro from '@components/PageIntro.astro';
 import Section from '@components/Section.astro';
-import GalleryBlock from '@components/GalleryBlock.astro';
 import CTABand from '@components/CTABand.astro';
 ---
 
-<BaseLayout title="About" description="About page template for a small business website.">
+<BaseLayout title="About" description="Learn about Mark Dennerley — Melbourne's heritage plastering specialist with 30 years of craftsmanship.">
   <PageIntro
     eyebrow="About"
-    title="A concise story with practical proof"
-    intro="Use this page to explain who the business serves, what it is known for, and why clients trust it."
+    title="30 years of craftsmanship"
+    intro="Mark Dennerley is the owner of Melbourne Plastering &amp; Building Maintenance. A master craftsman with three decades of experience, Mark brings a unique blend of artistic creativity and practical design skills to every project."
   />
 
-  <Section title="What clients should understand first" narrow>
+  <Section title="The Melbourne Plastering difference" narrow>
     <div class="prose">
       <p>
-        This starter keeps the about page direct. Replace this copy with the client’s origin story, service philosophy,
-        qualifications, and local context.
+        Mark treats every project as if it was his own. Whether restoring delicate period cornices in a Hawthorn
+        heritage home or delivering crisp square-set finishes for a contemporary build in Port Melbourne, the same
+        exacting standards apply.
       </p>
       <p>
-        For most small businesses, the goal is not a long biography. The goal is to make a visitor confident that the
-        business is real, capable, and easy to contact.
+        Respected by both customers and fellow tradesmen, Mark has built his reputation on reliability, precision,
+        and a genuine care for the work. His clients range from homeowners tackling renovations to architects
+        specifying premium finishes for high-end residential projects.
+      </p>
+      <p>
+        Melbourne Plastering &amp; Building Maintenance covers all aspects of plastering — ornamental cornicing,
+        solid plastering, skim coatings, suspended ceilings, square set finishes, and beyond. Mark also handles
+        the broader building maintenance needs that often come with plastering work: demolition, remodelling,
+        carpentry, painting, tiling, and render repairs.
       </p>
     </div>
   </Section>
 
-  <Section variant="surface" eyebrow="Images" title="Team, workplace, or process">
-    <GalleryBlock />
+  <Section variant="surface" title="Suburbs we service">
+    <div class="prose">
+      <p>
+        Melbourne Plastering services all Melbourne suburbs, with a strong presence across:
+      </p>
+      <p>
+        Hawthorn, Toorak, Middle Park, Albert Park, Port Melbourne, St Kilda, Elwood, East Melbourne,
+        North Melbourne, South Melbourne, West Melbourne, Northcote, Clifton Hill, Thornbury, Fitzroy,
+        North Fitzroy, Brunswick, Coburg, Footscray, Seddon, Yarraville, Williamstown, Newport, East Keilor,
+        Niddrie, Essendon, Aberfeldie, Avondale Heights, Kensington, Ascot Vale, Moonee Ponds, Maribyrnong,
+        Flemington, Brighton, East Brighton, Sunshine, Strathmore, Pascoe Vale, Glenroy, Elsternwick,
+        Carlton, Parkville.
+      </p>
+      <p>
+        If your suburb isn't listed — call anyway. Mark goes wherever the craftsmanship is needed.
+      </p>
+    </div>
   </Section>
 
   <CTABand
-    title="Make the next step obvious"
-    text="A strong about page should naturally lead visitors toward an enquiry, booking, or service page."
+    title="Ready to discuss your project?"
+    text="Call Mark on 0419 992 210 for a free quote and honest advice. Available Monday to Sunday."
+    label="Get in touch"
+    href="/contact/"
   />
 </BaseLayout>
