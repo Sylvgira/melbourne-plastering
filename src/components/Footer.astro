@@ -19,7 +19,7 @@ const isDark = variant === 'dark';
   <div class="site-footer__top container">
     <div class="site-footer__brand-col">
       <a class="site-footer__brand" href="/">
-        <span class="brand-lockup brand-lockup--footer">
+        <span class="brand-lockup">
           <span class="brand-lockup__primary">
             <span class="brand-lockup__city">Melbourne</span>
             <span class="brand-lockup__trade">Plastering</span>
@@ -155,12 +155,37 @@ const isDark = variant === 'dark';
     color: rgba(255, 255, 255, 0.65);
   }
 
-  .brand-lockup--footer .brand-lockup__primary {
-    font-size: 1.5rem;
+  .brand-lockup {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    line-height: 1.1;
   }
 
-  .brand-lockup--footer .brand-lockup__sub {
-    font-size: 0.9rem;
+  .brand-lockup__primary {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 0.35em;
+    font-weight: 800;
+    font-size: 1.25rem;
+  }
+
+  .brand-lockup__city {
+    color: var(--brand-primary);
+  }
+
+  .brand-lockup__trade {
+    color: var(--color-ink);
+  }
+
+  .brand-lockup__sub {
+    grid-column: 2;
+    justify-self: start;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--color-muted);
+    letter-spacing: 0.02em;
+    margin-top: -0.05em;
+    white-space: nowrap;
   }
 
   .site-footer__tagline {
