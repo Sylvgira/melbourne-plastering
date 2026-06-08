@@ -27,8 +27,14 @@ const isCurrent = (href: string) => pathname === href || pathname.startsWith(hre
 
 <header class="site-header">
   <div class="site-header__inner container">
-    <a class="site-header__brand" href="/" aria-label={`${site.name} home`}>
-      {site.name}
+    <a class="site-header__brand" href="/" aria-label="Melbourne Plastering home">
+      <span class="brand-lockup">
+        <span class="brand-lockup__primary">
+          <span class="brand-lockup__city">Melbourne</span>
+          <span class="brand-lockup__trade">Plastering</span>
+        </span>
+        <span class="brand-lockup__sub">&amp; Building Maintenance</span>
+      </span>
     </a>
     <nav class="site-header__nav" aria-label="Primary navigation">
       {nav.map((item) => (
@@ -58,9 +64,38 @@ const isCurrent = (href: string) => pathname === href || pathname.startsWith(hre
   }
 
   .site-header__brand {
-    color: var(--brand-name-color);
-    font-weight: 800;
     text-decoration: none;
+  }
+
+  .brand-lockup {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    line-height: 1.1;
+  }
+
+  .brand-lockup__primary {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 0.35em;
+    font-weight: 800;
+    font-size: 1.05rem;
+  }
+
+  .brand-lockup__city {
+    color: var(--brand-primary);
+  }
+
+  .brand-lockup__trade {
+    color: var(--color-ink);
+  }
+
+  .brand-lockup__sub {
+    grid-column: 2;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--color-muted);
+    letter-spacing: 0.02em;
+    margin-top: -0.05em;
   }
 
   .site-header__nav {
