@@ -2,6 +2,7 @@
 title: Residential Plastering
 summary: Comprehensive residential plastering — solid plastering, skim coatings, square set finishes, and laser battening for Melbourne homes.
 icon: 🏠
+image: /melbourne-plastering/uploads/service-residential.jpg
 order: 2
 ---
 

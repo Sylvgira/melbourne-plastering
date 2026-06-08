@@ -2,6 +2,7 @@
 title: Building Maintenance
 summary: General building maintenance — demolition, remodelling, carpentry, painting, tiling, and render repairs across Melbourne.
 icon: 🔧
+image: /melbourne-plastering/uploads/about-mark.jpg
 order: 4
 ---
 

@@ -2,6 +2,7 @@
 title: Heritage & Period Plastering
 summary: Expert period restoration and heritage plastering for Melbourne's character homes. Matching and restoring cornices, ceiling roses, and decorative mouldings.
 icon: 🏛️
+image: /melbourne-plastering/uploads/service-heritage.jpg
 order: 1
 ---
 

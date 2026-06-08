@@ -3,10 +3,9 @@ import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Hero from '@components/Hero.astro';
 import Section from '@components/Section.astro';
-import ServiceGrid from '@components/ServiceGrid.astro';
+import ServiceImageCard from '@components/ServiceImageCard.astro';
 import Testimonials from '@components/Testimonials.astro';
 import FAQList from '@components/FAQList.astro';
-import LogoStrip from '@components/LogoStrip.astro';
 import GalleryBlock from '@components/GalleryBlock.astro';
 import CTABand from '@components/CTABand.astro';
 import EmbedSection from '@components/EmbedSection.astro';
@@ -45,7 +44,7 @@ const hero = home?.data.hero;
     title="Heritage & Modern Plastering"
     intro="From period restoration to contemporary builds — Mark brings 30 years of craftsmanship to every project."
   >
-    <ServiceGrid services={services} variant={home?.data.servicesVariant} />
+    <ServiceImageCard services={services} />
   </Section>
 
   <Section

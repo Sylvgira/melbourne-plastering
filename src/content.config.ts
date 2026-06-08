@@ -7,6 +7,7 @@ const services = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
+    image: z.string().optional(),
     order: z.number().default(99),
     featured: z.boolean().default(false),
     seoTitle: z.string().optional(),

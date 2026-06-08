@@ -2,6 +2,7 @@
 title: Commercial Plastering
 summary: Professional commercial plastering — suspended ceilings, acoustic treatments, and metal stud walls for Melbourne businesses.
 icon: 🏢
+image: /melbourne-plastering/uploads/gallery-hero.jpg
 order: 3
 ---
 

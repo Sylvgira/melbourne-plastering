@@ -122,6 +122,8 @@ collections:
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Summary, name: summary, widget: text }
+      - { label: Icon, name: icon, widget: string, required: false }
+      - { label: Image, name: image, widget: image, required: false, hint: Service card background image }
       - { label: Order, name: order, widget: number, default: 99, value_type: int }
       - { label: Featured, name: featured, widget: boolean, default: false }
       - { label: SEO Title, name: seoTitle, widget: string, required: false }

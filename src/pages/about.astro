@@ -13,23 +13,32 @@ import CTABand from '@components/CTABand.astro';
   />
 
   <Section title="The Melbourne Plastering difference" narrow>
-    <div class="prose">
-      <p>
-        Mark treats every project as if it was his own. Whether restoring delicate period cornices in a Hawthorn
-        heritage home or delivering crisp square-set finishes for a contemporary build in Port Melbourne, the same
-        exacting standards apply.
-      </p>
-      <p>
-        Respected by both customers and fellow tradesmen, Mark has built his reputation on reliability, precision,
-        and a genuine care for the work. His clients range from homeowners tackling renovations to architects
-        specifying premium finishes for high-end residential projects.
-      </p>
-      <p>
-        Melbourne Plastering &amp; Building Maintenance covers all aspects of plastering — ornamental cornicing,
-        solid plastering, skim coatings, suspended ceilings, square set finishes, and beyond. Mark also handles
-        the broader building maintenance needs that often come with plastering work: demolition, remodelling,
-        carpentry, painting, tiling, and render repairs.
-      </p>
+    <div class="about-split">
+      <div class="about-split__text prose">
+        <p>
+          Mark treats every project as if it was his own. Whether restoring delicate period cornices in a Hawthorn
+          heritage home or delivering crisp square-set finishes for a contemporary build in Port Melbourne, the same
+          exacting standards apply.
+        </p>
+        <p>
+          Respected by both customers and fellow tradesmen, Mark has built his reputation on reliability, precision,
+          and a genuine care for the work. His clients range from homeowners tackling renovations to architects
+          specifying premium finishes for high-end residential projects.
+        </p>
+        <p>
+          Melbourne Plastering &amp; Building Maintenance covers all aspects of plastering — ornamental cornicing,
+          solid plastering, skim coatings, suspended ceilings, square set finishes, and beyond. Mark also handles
+          the broader building maintenance needs that often come with plastering work: demolition, remodelling,
+          carpentry, painting, tiling, and render repairs.
+        </p>
+      </div>
+      <div class="about-split__image">
+        <img
+          src="/melbourne-plastering/uploads/about-mark.jpg"
+          alt="Mark Dennerley — owner of Melbourne Plastering, working on a heritage plastering project"
+          loading="lazy"
+        />
+      </div>
     </div>
   </Section>
 
@@ -59,3 +68,42 @@ import CTABand from '@components/CTABand.astro';
     href="/contact/"
   />
 </BaseLayout>
+
+<style>
+  .about-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .about-split__image {
+    position: sticky;
+    top: var(--space-6);
+  }
+
+  .about-split__image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 760px) {
+    .about-split {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .about-split__image {
+      position: static;
+      order: -1;
+    }
+
+    .about-split__image img {
+      aspect-ratio: 4 / 3;
+    }
+  }
+</style>
