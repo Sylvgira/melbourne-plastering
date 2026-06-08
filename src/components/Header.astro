@@ -91,11 +91,13 @@ const isCurrent = (href: string) => pathname === href || pathname.startsWith(hre
 
   .brand-lockup__sub {
     grid-column: 2;
+    justify-self: start;
     font-size: 0.7rem;
     font-weight: 400;
     color: var(--color-muted);
     letter-spacing: 0.02em;
     margin-top: -0.05em;
+    white-space: nowrap;
   }
 
   .site-header__nav {
