@@ -13,19 +13,50 @@ interface Props {
 }
 
 const { testimonials, variant = 'grid' } = Astro.props;
+const isCarousel = testimonials.length > 1;
 ---
 
-<div class:list={['testimonials', `testimonials--${variant}`]}>
-  {testimonials.map((item) => (
-    <figure>
-      <blockquote>{item.data.quote}</blockquote>
-      <figcaption>
-        <strong>{item.data.name}</strong>
-        {item.data.role && <span>{item.data.role}</span>}
-      </figcaption>
-    </figure>
-  ))}
-</div>
+{isCarousel ? (
+  <div class="testimonial-carousel" id="testimonial-carousel">
+    <div class="testimonial-carousel__track">
+      {testimonials.map((item, i) => (
+        <figure
+          class="testimonial-carousel__slide"
+          class:list={{ 'testimonial-carousel__slide--active': i === 0 }}
+        >
+          <blockquote>{item.data.quote}</blockquote>
+          <figcaption>
+            <strong>{item.data.name}</strong>
+            {item.data.role && <span>{item.data.role}</span>}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+    <div class="testimonial-carousel__dots" aria-hidden="true">
+      {testimonials.map((_, i) => (
+        <button
+          type="button"
+          class="testimonial-carousel__dot"
+          class:list={{ 'testimonial-carousel__dot--active': i === 0 }}
+          data-index={i}
+          aria-label={`Testimonial ${i + 1}`}
+        ></button>
+      ))}
+    </div>
+  </div>
+) : (
+  <div class:list={['testimonials', `testimonials--${variant}`]}>
+    {testimonials.map((item) => (
+      <figure>
+        <blockquote>{item.data.quote}</blockquote>
+        <figcaption>
+          <strong>{item.data.name}</strong>
+          {item.data.role && <span>{item.data.role}</span>}
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+)}
 
 <style>
   .testimonials {
@@ -64,9 +95,111 @@ const { testimonials, variant = 'grid' } = Astro.props;
     color: var(--color-text);
   }
 
+  /* --- Carousel --- */
+
+  .testimonial-carousel {
+    position: relative;
+    max-width: 48rem;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .testimonial-carousel__track {
+    position: relative;
+  }
+
+  .testimonial-carousel__slide {
+    display: none;
+    margin: 0;
+    padding: var(--space-5);
+    border-left: 3px solid var(--brand-primary);
+    background: var(--color-page);
+    animation: testimonialFadeIn 0.4s ease;
+  }
+
+  .testimonial-carousel__slide--active {
+    display: block;
+  }
+
+  @keyframes testimonialFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .testimonial-carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-top: var(--space-5);
+  }
+
+  .testimonial-carousel__dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-rule);
+    cursor: pointer;
+    transition: background 0.25s ease;
+  }
+
+  .testimonial-carousel__dot--active {
+    background: var(--brand-primary);
+  }
+
+  .testimonial-carousel__dot:hover {
+    background: var(--brand-primary);
+    opacity: 0.7;
+  }
+
   @media (max-width: 760px) {
     .testimonials {
       grid-template-columns: 1fr;
     }
+
+    .testimonial-carousel {
+      max-width: 100%;
+    }
   }
 </style>
+
+{isCarousel && (
+  <script>
+    (function () {
+      const container = document.getElementById('testimonial-carousel');
+      if (!container) return;
+
+      const slides = container.querySelectorAll('.testimonial-carousel__slide');
+      const dots = container.querySelectorAll('.testimonial-carousel__dot');
+      let current = 0;
+      let interval;
+
+      function show(index) {
+        slides[current].classList.remove('testimonial-carousel__slide--active');
+        dots[current].classList.remove('testimonial-carousel__dot--active');
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('testimonial-carousel__slide--active');
+        dots[current].classList.add('testimonial-carousel__dot--active');
+      }
+
+      function next() { show(current + 1); }
+
+      function start() { interval = setInterval(next, 5000); }
+      function stop() { clearInterval(interval); }
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          stop();
+          show(parseInt(dot.dataset.index));
+          start();
+        });
+      });
+
+      container.addEventListener('mouseenter', stop);
+      container.addEventListener('mouseleave', start);
+
+      start();
+    })();
+  </script>
+)}
