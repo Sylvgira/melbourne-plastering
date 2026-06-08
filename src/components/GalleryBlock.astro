@@ -1,7 +1,7 @@
 ---
 interface Props {
   items?: Array<{ title: string; description?: string; imageUrl?: string }>;
-  variant?: 'grid' | 'feature-left' | 'feature-right' | 'portfolio';
+  variant?: 'grid' | 'feature-left' | 'feature-right' | 'portfolio' | 'showcase';
 }
 
 const {
@@ -23,7 +23,7 @@ const portfolioItems = items.length >= 4
   ];
 ---
 
-{ variant === 'portfolio' ? (
+{variant === 'portfolio' ? (
   <div class="gallery-block gallery-block--portfolio">
     <div class="portfolio-track">
       {portfolioItems.map((item) => (
@@ -38,6 +38,39 @@ const portfolioItems = items.length >= 4
             {item.description && <span>{item.description}</span>}
           </figcaption>
         </figure>
+      ))}
+    </div>
+  </div>
+) : variant === 'showcase' ? (
+  <div class="gallery-showcase" id="gallery-showcase">
+    <div class="gallery-showcase__main">
+      {portfolioItems.map((item, i) => (
+        <figure
+          class="gallery-showcase__slide"
+          class:list={{ 'gallery-showcase__slide--active': i === 0 }}
+          data-index={i}
+        >
+          <img src={item.imageUrl} alt={item.title} />
+          <figcaption>
+            <strong>{item.title}</strong>
+            {item.description && <span>{item.description}</span>}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+    <div class="gallery-showcase__thumbs" role="tablist" aria-label="Gallery images">
+      {portfolioItems.map((item, i) => (
+        <button
+          type="button"
+          class="gallery-showcase__thumb"
+          class:list={{ 'gallery-showcase__thumb--active': i === 0 }}
+          data-index={i}
+          role="tab"
+          aria-selected={i === 0}
+          aria-label={`View ${item.title}`}
+        >
+          <img src={item.imageUrl} alt="" aria-hidden="true" loading="lazy" />
+        </button>
       ))}
     </div>
   </div>
@@ -163,6 +196,103 @@ const portfolioItems = items.length >= 4
     margin-top: var(--space-3);
   }
 
+  /* --- showcase variant (feature image + thumbnails) --- */
+
+  .gallery-showcase {
+    max-width: var(--container-narrow);
+    margin: 0 auto;
+  }
+
+  .gallery-showcase__main {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-section);
+  }
+
+  .gallery-showcase__slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .gallery-showcase__slide--active {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .gallery-showcase__slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .gallery-showcase__slide figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: var(--space-5);
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: #fff;
+    border: none;
+  }
+
+  .gallery-showcase__slide figcaption strong {
+    color: #fff;
+  }
+
+  .gallery-showcase__slide figcaption span {
+    color: rgba(255,255,255,0.75);
+  }
+
+  .gallery-showcase__thumbs {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    overflow-x: auto;
+    padding-bottom: var(--space-1);
+  }
+
+  .gallery-showcase__thumb {
+    flex: 0 0 auto;
+    width: 80px;
+    height: 60px;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: var(--radius-xs);
+    background: none;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.25s ease, opacity 0.25s ease;
+    opacity: 0.6;
+  }
+
+  .gallery-showcase__thumb:hover {
+    opacity: 0.85;
+  }
+
+  .gallery-showcase__thumb--active {
+    border-color: var(--color-gold);
+    opacity: 1;
+  }
+
+  .gallery-showcase__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   @media (max-width: 760px) {
     .gallery-block {
       grid-template-columns: 1fr;
@@ -186,6 +316,15 @@ const portfolioItems = items.length >= 4
     .portfolio-card > div {
       aspect-ratio: 3 / 4;
     }
+
+    .gallery-showcase__slide img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .gallery-showcase__thumb {
+      width: 64px;
+      height: 48px;
+    }
   }
 
   @media (max-width: 480px) {
@@ -194,3 +333,60 @@ const portfolioItems = items.length >= 4
     }
   }
 </style>
+
+{variant === 'showcase' && (
+  <script>
+    (function () {
+      const container = document.getElementById('gallery-showcase');
+      if (!container) return;
+
+      const slides = container.querySelectorAll('.gallery-showcase__slide');
+      const thumbs = container.querySelectorAll('.gallery-showcase__thumb');
+      const main = container.querySelector('.gallery-showcase__main');
+      let current = 0;
+      let interval;
+
+      // Fix height to prevent layout shift
+      let maxH = 0;
+      slides.forEach((s) => {
+        s.style.position = 'absolute';
+        s.style.opacity = '1';
+        s.style.visibility = 'visible';
+        const h = s.offsetHeight;
+        if (h > maxH) maxH = h;
+        s.style.position = '';
+        s.style.opacity = '';
+        s.style.visibility = '';
+      });
+      main.style.minHeight = maxH + 'px';
+
+      function show(index) {
+        slides[current].classList.remove('gallery-showcase__slide--active');
+        thumbs[current].classList.remove('gallery-showcase__thumb--active');
+        thumbs[current].setAttribute('aria-selected', 'false');
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('gallery-showcase__slide--active');
+        thumbs[current].classList.add('gallery-showcase__thumb--active');
+        thumbs[current].setAttribute('aria-selected', 'true');
+      }
+
+      function next() { show(current + 1); }
+
+      function start() { interval = setInterval(next, 5000); }
+      function stop() { clearInterval(interval); }
+
+      thumbs.forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+          stop();
+          show(parseInt(thumb.dataset.index));
+          start();
+        });
+      });
+
+      container.addEventListener('mouseenter', stop);
+      container.addEventListener('mouseleave', start);
+
+      start();
+    })();
+  </script>
+)}

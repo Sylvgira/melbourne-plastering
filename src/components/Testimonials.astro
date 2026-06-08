@@ -101,29 +101,30 @@ const isCarousel = testimonials.length > 1;
     position: relative;
     max-width: 48rem;
     margin: 0 auto;
-    overflow: hidden;
   }
 
   .testimonial-carousel__track {
     position: relative;
+    overflow: hidden;
   }
 
   .testimonial-carousel__slide {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     margin: 0;
     padding: var(--space-5);
     border-left: 3px solid var(--brand-primary);
     background: var(--color-page);
-    animation: testimonialFadeIn 0.4s ease;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
   }
 
   .testimonial-carousel__slide--active {
-    display: block;
-  }
-
-  @keyframes testimonialFadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
+    opacity: 1;
+    visibility: visible;
   }
 
   .testimonial-carousel__dots {
@@ -172,8 +173,24 @@ const isCarousel = testimonials.length > 1;
 
       const slides = container.querySelectorAll('.testimonial-carousel__slide');
       const dots = container.querySelectorAll('.testimonial-carousel__dot');
+      const track = container.querySelector('.testimonial-carousel__track');
       let current = 0;
       let interval;
+
+      // Fix height to tallest slide to prevent layout shift
+      let maxH = 0;
+      slides.forEach((s) => {
+        s.style.position = 'absolute';
+        s.style.opacity = '1';
+        s.style.visibility = 'visible';
+        const h = s.offsetHeight;
+        if (h > maxH) maxH = h;
+        // Reset inline styles so CSS class takes over
+        s.style.position = '';
+        s.style.opacity = '';
+        s.style.visibility = '';
+      });
+      track.style.minHeight = maxH + 'px';
 
       function show(index) {
         slides[current].classList.remove('testimonial-carousel__slide--active');
