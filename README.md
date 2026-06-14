@@ -1,5 +1,8 @@
 # Small-Business Client Site Template
 
+[![Live Site](https://img.shields.io/badge/Live_Site-Melbourne%20Plastering%20%E2%86%92-blue?style=for-the-badge)](https://sylvgira.github.io/melbourne-plastering/)
+
+
 Astro starter for small client sites hosted on Cloudflare Pages and edited with Decap CMS. The template is intentionally neutral: start by changing content and CSS variables, then add brand-specific polish only where the client brief requires it.
 
 ## Stack
